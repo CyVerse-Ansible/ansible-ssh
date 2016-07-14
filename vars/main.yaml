@@ -1,4 +1,0 @@
----
-# vars file for ansible-geoip
-geo_ip_url: "http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz"
-    

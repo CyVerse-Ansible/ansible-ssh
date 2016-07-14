@@ -1,3 +1,0 @@
----
-# defaults file for ansible-geoip
-geo_ip_folder: "/usr/share/GeoIP"
