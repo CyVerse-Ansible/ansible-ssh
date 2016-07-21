@@ -22,11 +22,13 @@
 - debug: var=Ubuntu_check
 - debug: var=Centos_check
 
-- name: Print host info
-  local_action:
-    module: "debug"
-    args: "var='{{ item }}'"
-  with_items: "{{groups['docker_containers']}}"
+- debug: var=ansible_default_ipv4
+
+# - name: Print host info
+#   local_action:
+#     module: "debug"
+#     args: "msg='{{ item }}'"
+#   with_items: "{{groups['docker_containers']}}"
 
 - name: install ssh server
   package: name={{ item }} state=present
