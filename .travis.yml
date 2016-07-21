@@ -3,7 +3,7 @@ language: python
 python: "2.7"
 
 # Use the new container infrastructure
-sudo: false
+sudo: required
 
 # Install ansible
 addons:
@@ -17,7 +17,7 @@ install:
   # Install ansible
   - pip install six==1.10.0 docker-py==1.2.3
   - pip install ansible
-  - rm /usr/bin/python && sudo ln -s /usr/bin/python2.7 /usr/bin/python
+  - sudo rm /usr/bin/python && sudo ln -s /usr/bin/python2.7 /usr/bin/python
 
   # Create ansible.cfg with correct roles_path
   - printf '[defaults]\nroles_path=../' >ansible.cfg
