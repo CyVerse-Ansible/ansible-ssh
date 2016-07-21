@@ -43,7 +43,7 @@ script:
   # First run
   - sudo ansible-playbook -i tests/inventory tests/main.yml --connection=local
   # Idempotence test
-  - "sudo ansible-playbook -i tests/inventory tests/main.yml --connection=local
+  - "sudo ansible-playbook -i tests/inventory tests/main.yml --connection=local --skip-tags=docker
   | grep -q 'changed=0.*failed=0'
   && (echo 'Idempotence test: pass' && exit 0)
   || (echo 'Idempotence test: fail' && exit 1)"

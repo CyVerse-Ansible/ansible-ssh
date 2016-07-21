@@ -15,6 +15,7 @@
   roles:
     - role: provision_docker
       provision_docker_inventory: "{{ inventory }}"
+  tags: docker
 
 - name: Run ansible-ssh tests
   hosts: docker_containers
