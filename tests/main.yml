@@ -6,13 +6,17 @@
   vars:
     inventory:
       - name: dockerhost1
-        image: "Dockerfile.centos-7"
+        image: "Dockerfile.centos_6"
       - name: dockerhost2
-        image: "Dockerfile.ubuntu-14.04"
+        image: "Dockerfile.centos-7"
       - name: dockerhost3
+        image: "Dockerfile.ubuntu_12.04"
+      - name: dockerhost4
+        image: "Dockerfile.ubuntu-14.04"
+      - name: dockerhost5
         image: "Dockerfile.ubuntu-16.04"
   roles:
-    - role: provision_docker
+    - role: ../provision_docker
       provision_docker_inventory: "{{ inventory }}"
 
 - name: Run ansible-ssh tests
