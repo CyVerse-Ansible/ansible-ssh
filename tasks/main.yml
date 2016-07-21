@@ -11,11 +11,20 @@
 
 - name: Print OS info
   shell: cat /etc/lsb-release
+  register: Ubuntu_check
   ignore_errors: True
 
 - name: Print OS info
   shell: cat /etc/redhat-release
+  register: Centos_check
   ignore_errors: True
+
+- debug: var=Ubuntu_check
+- debug: var=Centos_check
+
+- name: Print host info
+  debug: var="{{ item }}"
+  with_items: groups['docker_containers']
 
 - name: install ssh server
   package: name={{ item }} state=present
