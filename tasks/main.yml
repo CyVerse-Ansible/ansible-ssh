@@ -24,8 +24,9 @@
 
 - name: Print host info
   local_action:
-  	debug: var="{{ item }}"
-  	with_items: "{{groups['docker_containers']}}"
+  	module: "debug"
+  	args: "var='{{ item }}'"
+  with_items: "{{groups['docker_containers']}}"
 
 - name: install ssh server
   package: name={{ item }} state=present
