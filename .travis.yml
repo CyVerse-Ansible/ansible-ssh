@@ -32,7 +32,7 @@ install:
   - sudo rm /usr/bin/python && sudo ln -s /usr/bin/python2.7 /usr/bin/python
 
   # Create ansible.cfg with correct roles_path
-  - printf '[defaults]\nroles_path=../' >ansible.cfg
+  # - printf '[defaults]\nroles_path=../' >ansible.cfg
   - ansible-galaxy install -r tests/requirements.yml -p tests/roles/
 
 script:
