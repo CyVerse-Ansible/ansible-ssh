@@ -12,10 +12,11 @@ addons:
       - python-pip
       - sshpass
       - python-software-properties
+  pip: name=docker-py state=latest
 
 install:
   # Install ansible
-  - pip install docker-py==1.2.3
+  - pip install docker-py
   - pip install ansible
   - sudo rm /usr/bin/python && sudo ln -s /usr/bin/python2.7 /usr/bin/python
 
