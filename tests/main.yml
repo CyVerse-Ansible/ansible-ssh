@@ -20,4 +20,4 @@
 - name: Run ansible-ssh tests
   hosts: docker_containers
   roles:
-    - ansible-ssh
+    - ../ansible-ssh
