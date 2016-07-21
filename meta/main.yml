@@ -1,7 +1,7 @@
 galaxy_info:
-  author: your name
-  description: your description
-  company: your company (optional)
+  author: Matt DePorter
+  description: Configure SSH Server
+  company: CyVerse
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -31,13 +31,13 @@ galaxy_info:
   # the ones that apply to your role. If you don't see your
   # platform on this list, let us know and we'll get it added!
   #
-  #platforms:
-  #- name: EL
-  #  versions:
+  platforms:
+  - name: EL
+    versions:
   #  - all
-  #  - 5
-  #  - 6
-  #  - 7
+      - 5
+      - 6
+      - 7
   #- name: GenericUNIX
   #  versions:
   #  - all
@@ -132,22 +132,22 @@ galaxy_info:
   #  - 9.1
   #  - 9.2
   #  - 9.3
-  #- name: Ubuntu
-  #  versions:
+  - name: Ubuntu
+    versions:
   #  - all
   #  - lucid
   #  - maverick
   #  - natty
   #  - oneiric
-  #  - precise
+      - precise
   #  - quantal
   #  - raring
   #  - saucy
-  #  - trusty
+      - trusty
   #  - utopic
   #  - vivid
   #  - wily
-  #  - xenial
+      - xenial
   #- name: SLES
   #  versions:
   #  - all

@@ -1,2 +1,5 @@
 ---
 # defaults file for ansible-ssh
+
+SSH:
+  port: 22
