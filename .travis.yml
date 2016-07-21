@@ -30,15 +30,13 @@ install:
   - sudo apt-get update -qq
   - sudo apt-get install -y ansible
   - sudo rm /usr/bin/python && sudo ln -s /usr/bin/python2.7 /usr/bin/python
-
-  # Create ansible.cfg with correct roles_path
-  - printf '[defaults]\nroles_path=../' >ansible.cfg
   - ansible-galaxy install -r tests/requirements.yml -p tests/roles/
 
 script:
   - ansible --version
   - sudo wget https://raw.githubusercontent.com/cyverse/ansible-tips-and-tricks/master/ansible.cfg -O /etc/ansible/ansible.cfg
   - sudo ansible all -i "127.0.0.1," -m lineinfile -a "regexp=^#host_key_checking dest=/etc/ansible/ansible.cfg line='host_key_checking = False'" -c local
+  - sudo ansible all -i "127.0.0.1," -m lineinfile -a "regexp=^#roles_path dest=/etc/ansible/ansible.cfg line='roles_path = ../'" -c local
   # Basic role syntax check
   - sudo cat /etc/ansible/ansible.cfg
   - ansible-playbook tests/main.yml -i tests/inventory --syntax-check
