@@ -37,6 +37,7 @@ install:
 
 script:
   - ansible --version
+  - sudo cat /etc/ansible/ansible.cfg
   - sudo ansible all -i "127.0.0.1," -m lineinfile -a "regexp=^#host_key_checking dest=/etc/ansible/ansible.cfg line='host_key_checking = False'" -c local
   # Basic role syntax check
   - sudo cat /etc/ansible/ansible.cfg
