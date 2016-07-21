@@ -1,0 +1,23 @@
+---
+
+- name: Bring up docker containers
+  hosts: localhost
+  gather_facts: false
+  vars:
+    inventory:
+      - name: dockerhost1
+        image: "Dockerfile.centos-7"
+      - name: dockerhost2
+        image: "Dockerfile.ubuntu-14.04"
+      - name: dockerhost3
+        image: "Dockerfile.ubuntu-15.04"
+      - name: dockerhost4
+        image: "Dockerfile.ubuntu-16.04"
+  roles:
+    - role: provision_docker
+	  provision_docker_inventory: "{{ inventory }}"
+
+- name: Run ansible-ssh tests
+  hosts: docker_containers
+  roles:
+  	- ansible-ssh
