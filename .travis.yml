@@ -23,11 +23,11 @@ install:
 
 script:
   # Basic role syntax check
-  - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
+  - ansible-playbook tests/main.yml -i tests/inventory --syntax-check
   # First run
-  - "ansible-playbook -i tests/inventory tests/test.yml --connection=local"
+  - "ansible-playbook -i tests/inventory tests/main.yml --connection=local"
   # Idempotence test
-  - "ansible-playbook -i tests/inventory tests/test.yml --connection=local
+  - "ansible-playbook -i tests/inventory tests/main.yml --connection=local
   | grep -q 'changed=0.*failed=0'
   && (echo 'Idempotence test: pass' && exit 0)
   || (echo 'Idempotence test: fail' && exit 1)"

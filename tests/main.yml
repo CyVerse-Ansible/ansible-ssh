@@ -10,8 +10,6 @@
       - name: dockerhost2
         image: "Dockerfile.ubuntu-14.04"
       - name: dockerhost3
-        image: "Dockerfile.ubuntu-15.04"
-      - name: dockerhost4
         image: "Dockerfile.ubuntu-16.04"
   roles:
     - role: provision_docker
