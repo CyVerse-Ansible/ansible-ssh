@@ -10,22 +10,21 @@ addons:
   apt:
     packages:
       - python-pip
+      - sshpass
+      - software-properties-common
+      - python-software-properties
 
 install:
   # Install ansible
   - pip install docker-py
-  - apt-get install -y sshpass software-properties-common python-software-properties
-  - apt-add-repository -y ppa:ansible/ansible
-  - apt-get update -qq
-  - apt-get install -y ansible
-  # Check ansible version
-  - ansible --version
+  - pip install ansible
 
   # Create ansible.cfg with correct roles_path
   - printf '[defaults]\nroles_path=../' >ansible.cfg
   - ansible-galaxy install -r tests/requirements.yml -p tests/roles/
 
 script:
+  - ansible --version
   # Basic role syntax check
   - ansible-playbook tests/main.yml -i tests/inventory --syntax-check
   # First run
