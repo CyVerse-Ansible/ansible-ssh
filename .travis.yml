@@ -15,7 +15,7 @@ addons:
 
 install:
   # Install ansible
-  - pip install six==1.10.0 docker-py==1.2.3
+  - pip install docker-py==1.2.3
   - pip install ansible
   - sudo rm /usr/bin/python && sudo ln -s /usr/bin/python2.7 /usr/bin/python
 
