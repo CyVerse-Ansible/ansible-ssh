@@ -9,11 +9,12 @@ sudo: false
 addons:
   apt:
     packages:
-    - python-pip
+      - python-pip
 
 install:
   # Install ansible
   - pip install ansible
+  - pip install docker-py
 
   # Check ansible version
   - ansible --version
