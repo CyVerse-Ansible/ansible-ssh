@@ -13,7 +13,7 @@
         image: "Dockerfile.ubuntu-16.04"
   roles:
     - role: provision_docker
-	  provision_docker_inventory: "{{ inventory }}"
+      provision_docker_inventory: "{{ inventory }}"
 
 - name: Run ansible-ssh tests
   hosts: docker_containers
