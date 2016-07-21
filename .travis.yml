@@ -11,12 +11,11 @@ addons:
     packages:
       - python-pip
       - sshpass
-      - software-properties-common
       - python-software-properties
 
 install:
   # Install ansible
-  - pip install docker-py
+  - pip install six==1.10.0 docker-py==1.2.3
   - pip install ansible
 
   # Create ansible.cfg with correct roles_path
