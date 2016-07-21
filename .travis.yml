@@ -27,7 +27,7 @@ addons:
 install:
   # Install ansible
   - sudo pip install docker-py
-  - pip install ansible
+  - sudo pip install ansible
   - sudo rm /usr/bin/python && sudo ln -s /usr/bin/python2.7 /usr/bin/python
 
   # Create ansible.cfg with correct roles_path
