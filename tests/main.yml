@@ -2,7 +2,6 @@
 
 - name: Bring up docker containers
   hosts: localhost
-  gather_facts: false
   vars:
     inventory:
       - name: dockerhost1
