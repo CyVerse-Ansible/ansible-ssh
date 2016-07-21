@@ -8,7 +8,7 @@ env:
     - PATH="/usr/bin:$PATH"
 
 # Use the new container infrastructure
-sudo: required
+# sudo: required
 
 before_install:
 # Ansible doesn't play well with virtualenv
@@ -17,14 +17,15 @@ before_install:
   - sudo apt-get install -y -o Dpkg::Options::="--force-confnew" docker-engine
 
 # Install ansible
-addons:
-  apt:
-    packages:
-      - python-pip
+# addons:
+#   apt:
+#     packages:
+#       - python-pip
 
 install:
   # Install ansible
   - sudo pip install docker-py
+  - sudo pip install redis
   - sudo apt-get install -y sshpass software-properties-common python-software-properties
   - sudo apt-add-repository -y ppa:ansible/ansible
   - sudo apt-get update -qq
