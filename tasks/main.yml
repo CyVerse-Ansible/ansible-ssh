@@ -23,8 +23,9 @@
 - debug: var=Centos_check
 
 - name: Print host info
-  debug: var="{{ item }}"
-  with_items: groups['docker_containers']
+  local_action:
+  	debug: var="{{ item }}"
+  	with_items: "{{groups['docker_containers']}}"
 
 - name: install ssh server
   package: name={{ item }} state=present
