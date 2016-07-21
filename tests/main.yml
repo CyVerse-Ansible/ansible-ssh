@@ -6,15 +6,13 @@
   vars:
     inventory:
       - name: dockerhost1
-        image: "Dockerfile.centos_6"
+        image: "chrismeyers/centos6"
       - name: dockerhost2
-        image: "Dockerfile.centos-7"
+        image: "chrismeyers/centos7"
       - name: dockerhost3
-        image: "Dockerfile.ubuntu_12.04"
+        image: "chrismeyers/ubuntu12.04"
       - name: dockerhost4
-        image: "Dockerfile.ubuntu-14.04"
-      - name: dockerhost5
-        image: "Dockerfile.ubuntu-16.04"
+        image: "ubuntu-upstart:14.04"
   roles:
     - role: provision_docker
       provision_docker_inventory: "{{ inventory }}"
