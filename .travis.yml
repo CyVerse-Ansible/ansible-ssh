@@ -42,8 +42,6 @@ script:
   - ansible-playbook tests/main.yml -i tests/inventory --syntax-check
   # First run
   - sudo ansible-playbook -i tests/inventory tests/main.yml --connection=local
-  # Idempotence test
-  - sudo ansible-playbook -i tests/inventory tests/main.yml --connection=local
   # Next test should check to see if ssh works
 
 notifications:
