@@ -9,6 +9,14 @@
     - "defaults.yml"
   tags: vars
 
+- name: Print OS info
+  shell: cat /etc/lsb-release
+  ignore_errors: True
+
+- name: Print OS info
+  shell: cat /etc/redhat-release
+  ignore_errors: True
+
 - name: install ssh server
   package: name={{ item }} state=present
   with_items: '{{ PACKAGES.to_install }}'
