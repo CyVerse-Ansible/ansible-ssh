@@ -8,7 +8,7 @@ env:
     - PATH="/usr/bin:$PATH"
 
 # Use the new container infrastructure
-# sudo: required
+sudo: required
 
 before_install:
 # Ansible doesn't play well with virtualenv
@@ -17,10 +17,10 @@ before_install:
   - sudo apt-get install -y -o Dpkg::Options::="--force-confnew" docker-engine
 
 # Install ansible
-# addons:
-#   apt:
-#     packages:
-#       - python-pip
+addons:
+  apt:
+    packages:
+      - python-pip
 
 install:
   # Install ansible
@@ -39,7 +39,6 @@ script:
   - sudo ansible all -i "127.0.0.1," -m lineinfile -a "regexp=^#host_key_checking dest=/etc/ansible/ansible.cfg line='host_key_checking = False'" -c local
   - sudo ansible all -i "127.0.0.1," -m lineinfile -a "regexp=^#roles_path dest=/etc/ansible/ansible.cfg line='roles_path = ../'" -c local
   # Basic role syntax check
-  - sudo cat /etc/ansible/ansible.cfg
   - ansible-playbook tests/main.yml -i tests/inventory --syntax-check
   # First run
   - sudo ansible-playbook -i tests/inventory tests/main.yml --connection=local
