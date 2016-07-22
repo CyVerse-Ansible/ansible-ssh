@@ -16,23 +16,18 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y -o Dpkg::Options::="--force-confnew" docker-engine
 
-# Install ansible
 addons:
   apt:
     packages:
       - python-pip
 
 install:
-  # Install ansible
   - sudo pip install docker-py
   - sudo apt-get install -y sshpass software-properties-common python-software-properties
   - sudo apt-add-repository -y ppa:ansible/ansible
   - sudo apt-get update -qq
   - sudo apt-get install -y ansible
   - sudo rm /usr/bin/python && sudo ln -s /usr/bin/python2.7 /usr/bin/python
-
-  # Create ansible.cfg with correct roles_path
-  # - printf '[defaults]\nroles_path=../' >ansible.cfg
   - ansible-galaxy install -r tests/requirements.yml -p tests/roles/
 
 script:
@@ -42,7 +37,6 @@ script:
   - ansible-playbook tests/main.yml -i tests/inventory --syntax-check
   # First run
   - sudo ansible-playbook -i tests/inventory tests/main.yml --connection=local
-  # Next test should check to see if ssh works
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
