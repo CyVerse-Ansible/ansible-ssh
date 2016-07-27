@@ -28,7 +28,7 @@ install:
   - sudo apt-get install libsdl1.2debian
   - sudo wget http://download.virtualbox.org/virtualbox/4.1.44/virtualbox-4.1_4.1.44-104071~Ubuntu~precise_amd64.deb
   - sudo dpkg -i virtualbox-4.1_4.1.44-104071~Ubuntu~precise_amd64.deb
-  - sudo apt-get install --no-remove vagrant
+  - sudo apt-get install --no-install-recommends vagrant
   - sudo pip install urllib3
   - sudo pip install --upgrade urllib3
   - sudo pip install --upgrade six
@@ -42,6 +42,7 @@ script:
   - vagrant init
   - molecule init
   - molecule test
+  - VBoxManage --version
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
