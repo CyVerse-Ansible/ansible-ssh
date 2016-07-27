@@ -28,14 +28,13 @@ install:
   - sudo rm /usr/bin/python && sudo ln -s /usr/bin/python2.7 /usr/bin/python
   - sudo pip install molecule
   - sudo pip install pyopenssl ndg-httpsclient pyasn1
-  - sudo pip install --upgrade urllib3
+  - sudo pip install urllib3
 
 script:
   - ansible --version
   - sudo ansible all -i "127.0.0.1," -m lineinfile -a "regexp=^#host_key_checking dest=/etc/ansible/ansible.cfg line='host_key_checking = False'" -c local
   # Basic role syntax check
   - ansible-playbook tests/main.yml -i tests/inventory --syntax-check
-  - pwd
   - molecule test
 
 notifications:
