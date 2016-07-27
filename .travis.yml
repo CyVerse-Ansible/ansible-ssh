@@ -25,6 +25,7 @@ install:
   - sudo apt-add-repository -y ppa:ansible/ansible
   - sudo apt-get update -qq
   - sudo apt-get install -y ansible
+  - sudo apt-get install libsdl1.2debian
   - sudo wget http://download.virtualbox.org/virtualbox/4.1.44/virtualbox-4.1_4.1.44-104071~Ubuntu~precise_amd64.deb
   - sudo dpkg -i virtualbox-4.1_4.1.44-104071~Ubuntu~precise_amd64.deb
   - sudo apt-get install vagrant
