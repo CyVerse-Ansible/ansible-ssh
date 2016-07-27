@@ -1,6 +1,6 @@
 ---
 
 - name: Run ansible-ssh tests
-  hosts: docker_containers
+  hosts: localhost
   roles:
     - ../ansible-ssh
