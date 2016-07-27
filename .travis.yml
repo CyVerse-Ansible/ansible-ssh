@@ -27,13 +27,13 @@ install:
   - sudo apt-get install -y ansible
   - sudo apt-get install libsdl1.2debian
   - sudo apt-get install libvpx1
-  - sudo wget https://releases.hashicorp.com/vagrant/1.8.5/vagrant_1.8.5_x86_64.deb
-  - sudo dpkg -i vagrant_1.8.5_x86_64.deb
+  - sudo apt-get install dkms
   - wget http://download.virtualbox.org/virtualbox/5.1.2/virtualbox-5.1_5.1.2-108956~Ubuntu~precise_amd64.deb
   - sudo dpkg -i virtualbox-5.1_5.1.2-108956~Ubuntu~precise_amd64.deb
+  - sudo wget https://releases.hashicorp.com/vagrant/1.8.5/vagrant_1.8.5_x86_64.deb
+  - sudo dpkg -i vagrant_1.8.5_x86_64.deb
   - sudo apt-get install build-essential linux-headers-`uname -r`
-  - sudo apt-get install virtualbox-dkms 
-  - sudo dpkg-reconfigure virtualbox-dkms 
+  # - sudo dpkg-reconfigure virtualbox-dkms 
   # - sudo dpkg-reconfigure virtualbox
   # - sudo apt-get install vagrant
   - sudo pip install urllib3
