@@ -25,8 +25,7 @@ install:
   - sudo apt-add-repository -y ppa:ansible/ansible
   - sudo apt-get update -qq
   - sudo apt-get install -y ansible
-  # - sudo pip install pyopenssl ndg-httpsclient pyasn1
-  # - sudo pip install --upgrade pyopenssl
+  - sudo apt-get install vagrant virtualbox
   - sudo pip install urllib3
   - sudo pip install --upgrade urllib3
   - sudo pip install --upgrade six
