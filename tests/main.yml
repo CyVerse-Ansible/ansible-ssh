@@ -1,21 +1,5 @@
 ---
 
-- name: Bring up docker containers
-  hosts: localhost
-  vars:
-    inventory:
-      - name: CentOS6
-        image: "chrismeyers/centos6"
-      - name: CentOS7
-        image: "chrismeyers/centos7"
-      - name: Ubuntu12
-        image: "chrismeyers/ubuntu12.04"
-      - name: Ubuntu14
-        image: "ubuntu-upstart:14.04"
-  roles:
-    - role: provision_docker
-      provision_docker_inventory: "{{ inventory }}"
-
 - name: Run ansible-ssh tests
   hosts: docker_containers
   roles:

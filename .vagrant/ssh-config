@@ -1,0 +1,22 @@
+Host ansible-ssh-01-trusty64
+  HostName 127.0.0.1
+  User vagrant
+  Port 2222
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentityFile "/Users/calvinmclean/dev/ansible-ssh/.vagrant/machines/ansible-ssh-01-trusty64/virtualbox/private_key"
+  IdentitiesOnly yes
+  LogLevel FATAL
+
+Host ansible-ssh-01-centos7
+  HostName 127.0.0.1
+  User vagrant
+  Port 2200
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentityFile "/Users/calvinmclean/dev/ansible-ssh/.vagrant/machines/ansible-ssh-01-centos7/virtualbox/private_key"
+  IdentitiesOnly yes
+  LogLevel FATAL
+
