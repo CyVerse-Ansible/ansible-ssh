@@ -27,6 +27,7 @@ install:
   - sudo apt-get install -y ansible
   - sudo rm /usr/bin/python && sudo ln -s /usr/bin/python2.7 /usr/bin/python
   - sudo pip install molecule
+  - sudo pip install pyopenssl ndg-httpsclient pyasn1
   - sudo pip install --upgrade urllib3
 
 script:
