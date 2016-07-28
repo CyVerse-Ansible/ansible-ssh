@@ -3,4 +3,4 @@
 - name: Run ansible-ssh tests
   hosts: localhost
   roles:
-    - ansible-ssh
+    - ../ansible-ssh
