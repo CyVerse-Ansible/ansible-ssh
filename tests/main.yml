@@ -1,6 +1,6 @@
 ---
 
 - name: Run ansible-ssh tests
-  hosts: root
+  hosts: localhost
   roles:
     - ansible-ssh
