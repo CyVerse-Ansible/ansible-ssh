@@ -9,27 +9,6 @@
     - "defaults.yml"
   tags: vars
 
-- name: Print OS info
-  shell: cat /etc/lsb-release
-  register: Ubuntu_check
-  ignore_errors: True
-
-- name: Print OS info
-  shell: cat /etc/redhat-release
-  register: Centos_check
-  ignore_errors: True
-
-- debug: var=Ubuntu_check
-- debug: var=Centos_check
-
-- debug: var=ansible_default_ipv4
-
-# - name: Print host info
-#   local_action:
-#     module: "debug"
-#     args: "msg='{{ item }}'"
-#   with_items: "{{groups['docker_containers']}}"
-
 - name: install ssh server
   package: name={{ item }} state=present
   with_items: '{{ PACKAGES.to_install }}'
