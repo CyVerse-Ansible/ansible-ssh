@@ -235,3 +235,125 @@
   tags:
     - debug
     - ssh-restart
+
+### atmo-user-ssh-keys.yml ###
+
+- name: Add users ssh keys to authorized_keys
+  authorized_key: user=root key="{{ item }}" state=present
+  with_items: "{{ SSHKEYS | default([]) }}"
+  become: yes
+  when: SSHKEYS is defined
+
+- name: Add users ssh keys to authorized_keys to home directory of user
+  authorized_key: user="{{ ATMOUSERNAME | default([]) }}" key="{{ SSHKEYS | join("\n") }}" state=present exclusive=yes
+  when: SSHKEYS is defined
+
+### atmo-common.yml ###
+
+- name: gather os specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "vars/{{ ansible_distribution }}-{{ ansible_distribution_major_version}}.yml"
+    - "vars/{{ ansible_distribution }}.yml"
+  tags: vars
+
+###########
+# Install #
+###########
+- name: install dependencies
+  action: >
+    {{ ansible_pkg_mgr }} name={{ item }} state=present
+  with_items: '{{ PACKAGES }}'
+  tags: install
+
+########
+# MOTD #
+########
+- name: install motd
+  copy: src=motd dest=/etc/motd
+
+- name: remove motd help text file, if present
+  file: path=/etc/update-motd.d/10-help-text state=absent
+  when: ansible_distribution == "Ubuntu"
+
+##########
+# CentOS #
+##########
+- name: disable SELinux for CentOS versions greater than 5
+  selinux: state=disabled
+  when: (ansible_distribution == "CentOS") and (ansible_distribution_major_version > '5')
+  tags: selinux
+
+- name: disable SELinux for CentOS 5
+  selinux: state=disabled conf=/etc/selinux/semanage.conf
+  when: (ansible_distribution == "CentOS") and (ansible_distribution_major_version == '5')
+  tags: selinux
+
+- name: download get-pip.py
+  shell: wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py --no-check-certificate
+  when: (ansible_distribution == "CentOS") and (ansible_distribution_major_version == '5')
+
+- name: install/upgrade pip
+  shell: /usr/bin/python26 get-pip.py chdir=/tmp/
+  when: (ansible_distribution == "CentOS") and (ansible_distribution_major_version == '5')
+
+##########
+# Ubuntu #
+##########
+- name: check ubuntu legal notice
+  stat: path=/etc/legal
+  register: ubuntu_legal
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - legal
+
+- name: move ubuntu legal file if it exists
+  command: mv /etc/legal /etc/legal.disabled
+  when: (ansible_distribution == "Ubuntu") and (ubuntu_legal.stat.exists is defined) and (ubuntu_legal.stat.exists)
+  tags:
+    - legal
+
+###########
+# General #
+###########
+
+- name: remove references to rc.local.atmo in rc.local
+  lineinfile: dest=/etc/rc.d/rc.local state=absent line="\n# this is for atmosphere\nif [ -x /etc/rc.d/rc.local.atmo ]; then\n\t/etc/rc.d/rc.local.atmo\nfi" 
+  when: ansible_distribution == "CentOS"
+  failed_when: False
+
+- name: remove rc.local.atmo file
+  file: path={{ RC_LOCAL_ATMO }} state=absent
+  failed_when: False
+
+- name: load acpiphp module
+  modprobe: name="{{ item }}" state=present
+  with_items: "{{ MODULES_TO_LOAD | default([])}}"
+  when: MODULES_TO_LOAD is defined
+
+- name: copy fuse conf file over
+  copy: src=files/fuse.conf dest=/etc/fuse.conf
+
+- name: change fusermount permissions
+  file: path=/bin/fusermount state=touch mode="u+s,a+rx"
+
+- name: make sure ssh directory exists
+  file: path=/root/.ssh/ state=directory mode="0700"
+
+- name: Check for file /etc/aliases
+  stat: path=/etc/aliases
+  register: aliases
+  tags: email
+
+- name: disable mail_always to prevent Ansible from spamming security
+  lineinfile: dest='{{ item.dest }}' regexp='{{ item.regexp }}' line='{{ item.line }}'
+  with_items:
+    - { dest: '/etc/sudoers', regexp: 'Defaults mail_always', line: '#Defaults mail_always' }
+  tags: email
+
+- name: disable support mailer in aliases to prevent Ansible from spamming security
+  lineinfile: dest='{{ item.dest }}' regexp='{{ item.regexp }}' line='{{ item.line }}'
+  with_items:
+    - { dest: '/etc/aliases', regexp: '^(.*)support:(.*)', line: '#support:        postmaster' }
+  when: aliases.stat.exists
+  tags: email
