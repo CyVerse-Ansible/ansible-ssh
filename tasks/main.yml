@@ -59,10 +59,6 @@
   ignore_errors: yes
   tags: remove-old-ssh-port-semanage
 
-- name: restart ssh service
-  service: name={{ SSHD }} state=restarted enabled=yes
-  tags: restart-ssh
-
 ### cso-ssh-key-setup.yml ###
 
 - name: generate ssh keys
@@ -357,3 +353,7 @@
     - { dest: '/etc/aliases', regexp: '^(.*)support:(.*)', line: '#support:        postmaster' }
   when: aliases.stat.exists
   tags: email
+
+- name: restart ssh service
+  service: name={{ SSHD }} state=restarted enabled=yes
+  tags: restart-ssh
