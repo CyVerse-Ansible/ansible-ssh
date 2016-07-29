@@ -211,27 +211,6 @@
   user: append=yes groups=users name='{{ ansible_user_id }}'
   when: ansible_distribution == "Ubuntu"
 
-- name: manual OS detection
-  stat: path=/etc/redhat-release
-  register: os_ver
-  tags:
-    - debug
-    - ssh-restart
-
-- name: restart ssh if ubuntu
-  service: name=ssh state=restarted
-  when: not os_ver.stat.exists
-  tags:
-    - debug
-    - ssh-restart
-
-- name: restart sshd if centos
-  service: name=sshd state=restarted
-  when: os_ver.stat.exists
-  tags:
-    - debug
-    - ssh-restart
-
 ### atmo-user-ssh-keys.yml ###
 
 - name: Add users ssh keys to authorized_keys
@@ -252,25 +231,6 @@
     - "vars/{{ ansible_distribution }}-{{ ansible_distribution_major_version}}.yml"
     - "vars/{{ ansible_distribution }}.yml"
   tags: vars
-
-###########
-# Install #
-###########
-- name: install dependencies
-  action: >
-    {{ ansible_pkg_mgr }} name={{ item }} state=present
-  with_items: '{{ PACKAGES }}'
-  tags: install
-
-########
-# MOTD #
-########
-- name: install motd
-  copy: src=motd dest=/etc/motd
-
-- name: remove motd help text file, if present
-  file: path=/etc/update-motd.d/10-help-text state=absent
-  when: ansible_distribution == "Ubuntu"
 
 ##########
 # CentOS #
@@ -332,9 +292,6 @@
 
 - name: change fusermount permissions
   file: path=/bin/fusermount state=touch mode="u+s,a+rx"
-
-- name: make sure ssh directory exists
-  file: path=/root/.ssh/ state=directory mode="0700"
 
 - name: Check for file /etc/aliases
   stat: path=/etc/aliases
