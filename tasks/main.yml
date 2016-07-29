@@ -10,7 +10,7 @@
 
 - name: install ssh server
   package: name={{ item }} state=present
-  with_items: '{{ PACKAGES.to_install }}'
+  with_items: '{{ PACKAGES }}'
   tags: install
 
 - name: copy motd.ssh

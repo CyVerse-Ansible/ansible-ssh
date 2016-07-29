@@ -15,22 +15,13 @@ before_install:
   - deactivate
   - sudo apt-get update -qq
 
-# addons:
-#   apt:
-#     packages:
-#       - python-pip
-
 install:
   - sudo apt-get install python-pip -y
   - sudo pip install ansible==2.1.0.0
 
-
 script:
   - ansible --version
-  # - sudo ansible all -i "127.0.0.1," -m lineinfile -a "regexp=^#host_key_checking dest=/etc/ansible/ansible.cfg line='host_key_checking = False'" -c local
-  # Basic role syntax check
   - ansible-playbook tests/main.yml -i tests/inventory --syntax-check
-  # First run
   - sudo ansible-playbook -i tests/inventory tests/main.yml --connection=local
 
 notifications:
