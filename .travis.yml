@@ -21,7 +21,7 @@ before_install:
 #       - python-pip
 
 install:
-  - sudo apt-get install python-pip
+  - sudo apt-get install python-pip -y
   - sudo pip install ansible==2.1.0.0
 
 
