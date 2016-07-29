@@ -1,5 +1,0 @@
----
-
-PACKAGES:
-  to_install:
-    - openssh-server

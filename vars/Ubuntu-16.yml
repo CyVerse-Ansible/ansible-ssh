@@ -21,11 +21,10 @@ PACKAGES:
   - zsh
   - mosh
   - qemu-guest-agent
-  - openssh-server
 
-MODULES_TO_LOAD:
-  - acpiphp
-
+# Add modules to be loaded here
+# MODULES_TO_LOAD:
+#   - acpiphp
 SSHD: ssh
 
 SSH_PACKAGE:

@@ -20,8 +20,8 @@ PACKAGES:
   - tcsh
   - zsh
   - mosh
-  - qemu-guest-agent
-  - openssh-server
+  - fuse-utils
+  - fuse
 
 MODULES_TO_LOAD:
   - acpiphp

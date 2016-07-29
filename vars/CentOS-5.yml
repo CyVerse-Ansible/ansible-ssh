@@ -2,31 +2,30 @@
 
 # from atmosphere-ansible/ansible/roles/atmo-common/vars
 
-RC_LOCAL_ATMO: /etc/rc.local.atmo
+RC_LOCAL_ATMO: /etc/rc.d/rc.local.atmo
 
 PACKAGES:
-  - libfam0
-  - python
-  - python-ldap
-  - python-software-properties
-  - python-httplib2
-  - libfuse2
+  - epel-release
+  - python26
+  - zsh
   - tmux
   - screen
   - autoconf
   - gcc
   - make
-  - patch
   - tcsh
-  - zsh
-  - mosh
-  - qemu-guest-agent
-  - openssh-server
+  - nss_ldap
+  - patch
+  - fuse
+  - fuse-devel.x86_64
+  - python
+  - python-ldap
 
-MODULES_TO_LOAD:
-  - acpiphp
 
-SSHD: ssh
+# Add modules to be loaded here
+#MODULES_TO_LOAD:
+#  - 
+SSHD: sshd
 
 SSH_PACKAGE:
   name: openssh-server
