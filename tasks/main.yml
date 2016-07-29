@@ -1,5 +1,4 @@
 ---
-# tasks file for ansible-ssh
 
 - name: gather os specific variables
   include_vars: "{{ item }}"

@@ -15,12 +15,13 @@ before_install:
   - deactivate
   - sudo apt-get update -qq
 
-addons:
-  apt:
-    packages:
-      - python-pip
+# addons:
+#   apt:
+#     packages:
+#       - python-pip
 
 install:
+  - sudo apt-get install python-pip
   - sudo pip install ansible==2.1.0.0
 
 
