@@ -13,3 +13,16 @@
   package: name={{ item }} state=present
   with_items: '{{ PACKAGES.to_install }}'
   tags: install
+
+- name: copy motd.ssh
+  copy: src=files/motd dest=/etc/motd.ssh mode=0444
+  tags: copy-motd
+
+- name: configure ssh
+  template: src={{ item }} dest={{ SSH_CONFIG }} backup=yes
+  with_first_found:
+    - "templates/{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.sshd_config.j2"
+    - "templates/{{ ansible_distribution }}.sshd_config.j2"
+    - "templates/{{ ansible_os_family }}.sshd_config.j2"
+    - "templates/default.sshd_config.j2"
+  tags: template-sshd-config
